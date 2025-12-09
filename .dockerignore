@@ -1,1 +1,9 @@
+.git/
+Dockerfile
+LICENSE
 
+# Python & Project stuff
+__pycache__/
+build/
+.env
+schema.pdf
