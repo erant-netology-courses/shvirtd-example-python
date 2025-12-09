@@ -84,7 +84,7 @@ def index(request: Request, ip_address: Optional[str] = Depends(get_client_ip)):
     try:
         with get_db_connection() as db:
             cursor = db.cursor()
-            query = f"INSERT INTO {db_table_name} (request_date, request_ip) VALUES (%s, %s)"
+            query = f"INSERT INTO `{db_table_name}` (request_date, request_ip) VALUES (%s, %s)"
             values = (current_time, final_ip)
             cursor.execute(query, values)
             db.commit()
