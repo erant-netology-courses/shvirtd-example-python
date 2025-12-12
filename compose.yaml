@@ -1,0 +1,41 @@
+version: '3.8'
+include:
+  - proxy.yaml
+services:
+  db:
+    image: mysql:8
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_HOST: "%"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      backend:
+        ipv4_address: 172.20.0.10
+
+  web:
+    image: cr.yandex/crp6gmeev8bnq1es8cmd/initial-launch-python-fastapi:latest
+#    build: 
+#      context: .
+#      dockerfile: Dockerfile.python
+    restart: always
+    environment:
+      DB_NAME: ${MYSQL_DATABASE}
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_HOST: db
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    networks:
+      backend:
+        ipv4_address: 172.20.0.5
