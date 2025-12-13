@@ -17,4 +17,4 @@ sudo docker run --rm \
   -e MYSQL_HOST=db \
   schnitzler/mysqldump:latest \
   sh -c 'mysqldump --opt -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" --ssl-mode=DISABLED --default-auth=mysql_native_password' \
-  > /opt/backup/${now}_${MYSQL_DATABASE}.sql 2>&1
+  > ${BACKUP_DIR}/${now}_${MYSQL_DATABASE}.sql 2>&1
