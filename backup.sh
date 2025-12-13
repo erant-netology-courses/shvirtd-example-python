@@ -18,3 +18,6 @@ sudo docker run --rm \
   schnitzler/mysqldump:latest \
   sh -c 'mysqldump --opt -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" --ssl-mode=DISABLED --default-auth=mysql_native_password' \
   > ${BACKUP_DIR}/${now}_${MYSQL_DATABASE}.sql 2>&1
+
+# cron:
+# * * * * * /home/admin/netology_docker/shvirtd-example-python/backup.sh
