@@ -5,6 +5,7 @@ services:
   db:
     image: mysql:8
     restart: on-failure
+    command: --mysql-native-password=ON
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
