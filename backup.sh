@@ -10,7 +10,7 @@ now=$(date +"%s_%Y-%m-%d")
 BACKUP_DIR="/opt/backup"
 sudo mkdir -p "$BACKUP_DIR"
 
-docker run --rm \
+sudo docker run --rm \
   --entrypoint "" \
   --network=shvirtd-example-python_backend \
   --env-file .env \
