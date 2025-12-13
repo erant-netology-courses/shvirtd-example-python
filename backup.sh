@@ -6,7 +6,9 @@
 # 4. Монтировать файл с секретами
 # 5. .env как тут
 now=$(date +"%s_%Y-%m-%d")
-sudo mkdir /opt/backup
+
+BACKUP_DIR="/opt/backup"
+sudo mkdir -p "$BACKUP_DIR"
 
 docker run --rm \
   --entrypoint "" \
